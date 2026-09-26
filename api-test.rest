@@ -1,0 +1,115 @@
+### Get all students
+GET http://localhost:8080/students
+
+### Get a student by ID
+GET http://localhost:8080/students/6ab82b195ab89147ca60712c
+
+
+### 404 Handling
+GET http://localhost:8080/students/000000000000000000000000
+
+
+### Post a new student
+POST http://localhost:8080/students
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "08012345678",
+    "dateOfBirth": "2008-05-15",
+    "gender": "Male",
+    "classId": "JSS2-A",
+    "address": "Port Harcourt, Nigeria",
+    "enrollmentDate": "2026-09-01"
+}
+
+
+### Update a student by ID
+PUT http://localhost:8080/students/6ab82b195ab89147ca60712c
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe.updated@example.com",
+    "phone": "08012345678",
+    "dateOfBirth": "2008-05-15",
+    "gender": "Male",
+    "classId": "JSS2-A",
+    "address": "Port Harcourt, Nigeria",
+    "enrollmentDate": "2026-09-01"
+}
+
+### Delete a student by ID
+DELETE http://localhost:8080/students/6ab82b195ab89147ca60712c
+
+
+
+
+//CLASSES
+### Get all classes
+GET http://localhost:8080/classes
+
+
+### Get a class by ID
+GET http://localhost:8080/classes/6ab8358a800205b75d41fb7f
+
+### 404 Handling
+GET http://localhost:8080/classes/000000000000000000000000
+
+### Post a new class
+POST http://localhost:8080/classes
+Content-Type: application/json
+
+{
+    "name": "JSS2 A",
+    "gradeLevel": "JSS2",
+    "section": "A",
+    "teacherName": "Mrs. Williams",
+    "room": "Room 12",
+    "academicYear": "2026-2027",
+    "capacity": 35
+}
+
+
+### Update a class by ID
+PUT http://localhost:8080/classes/6ab8358a800205b75d41fb7f
+Content-Type: application/json
+
+{
+    "name": "JSS2 A",
+    "gradeLevel": "JSS2",
+    "section": "A",
+    "teacherName": "Mr. Williams",
+    "room": "Room 12",
+    "academicYear": "2026-2027",
+    "capacity": 35
+}
+
+### Delete a class by ID
+DELETE http://localhost:8080/classes/6ab8358a800205b75d41fb7f
+
+
+
+//CHECK FOR VALIDATION
+### Verifying validation for student creation
+POST http://localhost:8080/students
+Content-Type: application/json
+
+{
+    "firstName": "Test",
+    "lastName": "Student"
+}
+
+### verifying validation for class creation
+POST http://localhost:8080/classes
+Content-Type: application/json
+
+{
+    "name": "Test Class"
+}
+
+###
+GET http://localhost:8080/
