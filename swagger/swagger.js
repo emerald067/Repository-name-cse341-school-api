@@ -10,7 +10,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:8080"
+                url: "https://repository-name-cse341-school-api.onrender.com"
             }
         ]
     },
