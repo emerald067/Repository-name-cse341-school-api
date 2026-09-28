@@ -27,7 +27,7 @@ Content-Type: application/json
 
 
 ### Update a student by ID
-PUT http://localhost:8080/students/6ab82b195ab89147ca60712c
+PUT http://localhost:8080/students/6abae8001062c672738764e3
 Content-Type: application/json
 
 {
@@ -43,7 +43,7 @@ Content-Type: application/json
 }
 
 ### Delete a student by ID
-DELETE http://localhost:8080/students/6ab82b195ab89147ca60712c
+DELETE http://localhost:8080/students/6abae8001062c672738764e3
 
 
 

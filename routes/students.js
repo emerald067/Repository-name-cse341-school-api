@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+
 /**
  * @swagger
  * /students/{id}:
@@ -58,6 +59,7 @@ router.get("/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to get student" });
     }
 });
+
 
 /**
  * @swagger
@@ -128,6 +130,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+
 /**
  * @swagger
  * /students/{id}:
@@ -147,6 +150,16 @@ router.post("/", async (req, res) => {
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - firstName
+ *               - lastName
+ *               - email
+ *               - phone
+ *               - dateOfBirth
+ *               - gender
+ *               - classId
+ *               - address
+ *               - enrollmentDate
  *             properties:
  *               firstName:
  *                 type: string
@@ -187,6 +200,29 @@ router.post("/", async (req, res) => {
  */
 router.put("/:id", async (req, res) => {
     try {
+        const requiredFields = [
+            "firstName",
+            "lastName",
+            "email",
+            "phone",
+            "dateOfBirth",
+            "gender",
+            "classId",
+            "address",
+            "enrollmentDate"
+        ];
+
+        const missingFields = requiredFields.filter(
+            (field) => !req.body[field]
+        );
+
+        if (missingFields.length > 0) {
+            return res.status(400).json({
+                error: "Missing required fields",
+                missingFields: missingFields
+            });
+        }
+
         const updatedStudent = await Student.findByIdAndUpdate(
             req.params.id,
             req.body,
@@ -205,6 +241,7 @@ router.put("/:id", async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
 
 /**
  * @swagger

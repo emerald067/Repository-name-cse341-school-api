@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
     }
 });
 
+
 /**
  * @swagger
  * /classes/{id}:
@@ -58,6 +59,7 @@ router.get("/:id", async (req, res) => {
         res.status(500).json({ error: "Failed to get class" });
     }
 });
+
 
 /**
  * @swagger
@@ -118,6 +120,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+
 /**
  * @swagger
  * /classes/{id}:
@@ -137,6 +140,14 @@ router.post("/", async (req, res) => {
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - name
+ *               - gradeLevel
+ *               - section
+ *               - teacherName
+ *               - room
+ *               - academicYear
+ *               - capacity
  *             properties:
  *               name:
  *                 type: string
@@ -169,6 +180,29 @@ router.post("/", async (req, res) => {
  */
 router.put("/:id", async (req, res) => {
     try {
+        const requiredFields = [
+            "name",
+            "gradeLevel",
+            "section",
+            "teacherName",
+            "room",
+            "academicYear",
+            "capacity"
+        ];
+
+        const missingFields = requiredFields.filter(
+            (field) => req.body[field] === undefined ||
+                       req.body[field] === null ||
+                       req.body[field] === ""
+        );
+
+        if (missingFields.length > 0) {
+            return res.status(400).json({
+                error: "Missing required fields",
+                missingFields: missingFields
+            });
+        }
+
         const updatedClass = await Class.findByIdAndUpdate(
             req.params.id,
             req.body,
@@ -187,6 +221,7 @@ router.put("/:id", async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
 
 /**
  * @swagger
