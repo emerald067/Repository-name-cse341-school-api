@@ -1,5 +1,6 @@
 const express = require("express");
 const Student = require("../models/student");
+const { requiresAuth } = require("express-openid-connect");
 
 const router = express.Router();
 
@@ -8,6 +9,8 @@ const router = express.Router();
  * /students:
  *   get:
  *     summary: Get all students
+ *     security:
+ *       - auth0: []
  *     tags: [Students]
  *     responses:
  *       200:
@@ -15,7 +18,7 @@ const router = express.Router();
  *       500:
  *         description: Failed to get students
  */
-router.get("/", async (req, res) => {
+router.get("/", requiresAuth(), async (req, res) => {
     try {
         const students = await Student.find();
         res.status(200).json(students);
